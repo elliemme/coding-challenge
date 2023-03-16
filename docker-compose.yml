@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/movies
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - ./.data:/data/db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    environment:
+      BACKEND_URL: http://backend:3000
+    depends_on:
+      - backend
