@@ -32,6 +32,13 @@ You need to build a web application that allows users to view and filter a list 
 - Functionality and correctness of the application
 - Proper error handling and input validation
 
+### Optional (Nice to Have)
+ 
+ - Typescript
+ - Linting
+ - CI/CD
+ - Unit Test
+
 ## Starting Guide
 
 - Fork this repository
