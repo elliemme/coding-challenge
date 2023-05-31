@@ -1,0 +1,30 @@
+.chip-genre {
+  background-color: transparent;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  justify-content: center;
+  flex-wrap: wrap;
+  display: inline-flex;
+  align-content: center;
+  margin-top: 930px;
+}
+
+.MuiChip-label {
+  color: whitesmoke;
+  font-weight: 500;
+  background-color: transparent;
+  border-radius: 50px;
+}
+
+.MuiChip-label:hover {
+  opacity: 1;
+  color: black;
+  background-color: rgb(245, 225, 52);
+}
+
+.MuiChip-icon {
+  margin-left: 4px;
+  width: 25px;
+  height: 25px;
+}

@@ -1,39 +1,29 @@
-const express = require('express');
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+import "dotenv/config";
+import express from "express";
+import cookieParser from "cookie-parser";
+import userRoutes from "./routes/users-routes.js";
+import cors from "cors";
+import moviesRoutes from "./controllers/movies-controller.js";
 
 const app = express();
 
-// Parse JSON request bodies
+app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 
-// Connect to the MongoDB database
+const PORT = process.env.PORT || 8000;
+
+app.use("/user", userRoutes);
+app.use("/movies", moviesRoutes);
+
+mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
   useUnifiedTopology: true,
+  useNewUrlParser: true,
 });
 
-// Define a schema for the movie collection
-const movieSchema = new mongoose.Schema({
-  title: String,
-  director: String,
-  year: Number,
-});
-
-// Create a model for the movie collection
-const Movie = mongoose.model('Movie', movieSchema);
-
-// Define a route for getting all movies
-app.get('/movies', async (req, res) => {
-  try {
-    const movies = await Movie.find();
-    res.json(movies);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
-});
-
-// Start the server
-app.listen(3000, () => {
-  console.log('Server started on port 3000');
+app.listen(PORT, () => {
+  console.log(`😍🤞server is running on port ${PORT}`);
 });
