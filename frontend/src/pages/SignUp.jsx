@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import swal from 'sweetalert';
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,8 +22,10 @@ export default function SignUp() {
     try {
       const { email, password } = formValues;
       await createUserWithEmailAndPassword(firebaseAuth, email, password);
+      swal("Successfully registered","", "success");
     } catch (error) {
       console.log(error);
+      swal("All fields are required","", "error");
     }
   };
 

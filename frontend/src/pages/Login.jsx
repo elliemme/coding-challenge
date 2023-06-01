@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { firebaseAuth } from "../utils/firebase-config";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import swal from "sweetalert";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -14,8 +15,10 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
+      swal("Logged in successfully", "", "success");
     } catch (error) {
       console.log(error.code);
+      swal("All fields are required", "Or sign up first", "error");
     }
   };
 

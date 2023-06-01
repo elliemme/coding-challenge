@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import "./SearchPage.css";
 import CustomPagination from "../../components/CustomPagination.js";
-import {
-  Button,
-  Tab,
-  Tabs,
-  TextField,
-} from "@mui/material";
+import { Button, Tab, Tabs, TextField } from "@mui/material";
 import axios from "axios";
 import SearchIcon from "@mui/icons-material/Search";
 import "./SearchPage.css";
@@ -103,7 +98,7 @@ function SearchPage() {
             marginRight: "auto",
           }}
         >
-          <div className="trending">
+          <div className="popular">
             {content &&
               content.map((movie, index) => {
                 return (

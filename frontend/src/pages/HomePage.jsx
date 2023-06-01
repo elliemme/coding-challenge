@@ -3,14 +3,14 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IMAGE_URL } from "../helpers/image";
-import CardsMovies from "../components/CardsMovies/CardsMovies";
 import "../pages/HomePage/HomePage.css";
 import CustomPagination from "../components/CustomPagination.js";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import useGenre from "../helpers/useGenre.js";
 import Genres from "../components/Genres/Genres";
+import CardsHome from "../components/CardsHome/CardsHome";
 
 function HomePage() {
   const [genres, setGenres] = useState([]);
@@ -22,9 +22,23 @@ function HomePage() {
   const navigate = useNavigate();
 
   const genreforURL = useGenre(selectedGenres);
-  console.log(selectedGenres);
 
-  const fetchAllMovies = async () => {
+  const AllMovies = async () => {
+    const { data } = await axios.get(
+      `http://localhost:8000/movies/all?&page=${page}`
+    );
+
+    console.log(data);
+
+    setMovie(data.results);
+    setNumOfPages(data.totalPages);
+  };
+
+  useEffect(() => {
+    AllMovies();
+  }, [page]);
+
+  const fetchMoviesByGenre = async () => {
     const { data } = await axios.get(
       `http://localhost:8000/movies/genre?genreId=${genreforURL}&page=${page}`
     );
@@ -33,7 +47,7 @@ function HomePage() {
   };
 
   useEffect(() => {
-    fetchAllMovies();
+    fetchMoviesByGenre();
   }, [genreforURL, page]);
 
   window.onscroll = () => {
@@ -51,7 +65,7 @@ function HomePage() {
         setGenres={setGenres}
         setPage={setPage}
       />
-      <div></div>
+
       <Carousel
         showThumbs={false}
         autoPlay={true}
@@ -66,43 +80,36 @@ function HomePage() {
                 src={`${IMAGE_URL}original${movie && movie.backdrop_path}`}
               />
             </div>
-
-            <div className="posterImage_title">
-              {movie ? movie.original_title : ""}
-            </div>
-            <div className="posterImage_description">
-              {movie ? movie.overview : ""}
-            </div>
-            <div className="buttons flex">
-              <button
-                className="flex j-center a-center"
-                onClick={() => navigate(`/movie/${movie.id}`)}
-              >
-                <AiOutlineInfoCircle />
-                More Info
-              </button>
+            <div className="movieDescription">
+              <div className="posterImage_title">
+                {movie ? movie.original_title : ""}
+              </div>
+              <div className="posterImage_description">
+                {movie ? movie.overview : ""}
+              </div>
+              <div className="buttons flex">
+                <button
+                  className="flex j-center a-center"
+                  onClick={() => navigate(`/movie/${movie.id}`)}
+                >
+                  <AiOutlineInfoCircle />
+                  More Info
+                </button>
+              </div>
             </div>
           </>
         ))}
       </Carousel>
 
-      <div
-        className="homePage"
-        style={{ width: "100%", marginTop: "95px", textAlign: "center" }}
-      >
-        <span
-          className="pageTitle"
-          style={{ fontSize: "30px", textTransform: "uppercase" }}
-        >
-          Popular Movies
-        </span>
-        <div className="popular">
-          {movie && movie.map((movie) => <CardsMovies movie={movie} />)}
-        </div>
-        {numOfPages > 1 && (
-          <CustomPagination setPage={setPage} numOfPages={numOfPages} />
-        )}
+      <div className="popular">
+        {movie.map((movie) => (
+          <CardsHome movie={movie} key={movie.id} id={movie.id} />
+        ))}
       </div>
+
+      {numOfPages > 1 && (
+        <CustomPagination setPage={setPage} numOfPages={numOfPages} />
+      )}
     </>
   );
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import CardsMovies from "../components/CardsMovies/CardsMovies";
 import CustomPagination from "../components/CustomPagination.js";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import CardsHome from "../components/CardsHome/CardsHome";
 
 const UpComing = () => {
   const [movieList, setMovieList] = useState([]);
@@ -44,7 +44,7 @@ const UpComing = () => {
         </span>
         <div className="popular">
           {movieList.map((movie) => (
-            <CardsMovies movie={movie} key={movie.id} id={movie.id} />
+            <CardsHome movie={movie} key={movie.id} id={movie.id} />
           ))}
         </div>
       </div>

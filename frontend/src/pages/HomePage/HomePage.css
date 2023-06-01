@@ -1,8 +1,12 @@
 .popular {
+  padding-bottom: 20px;
   padding-top: 20px;
-  padding-bottom: 80px;
-  padding-left: 150px;
-  padding-right: 150px;
+  margin-left: 150px;
+  margin-right: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: black;
 }
 
 .posterImage {
@@ -37,10 +41,15 @@
 .posterImage_title {
   font-weight: 900;
   font-size: 4rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0;
   text-align: left;
   color: white;
   margin-left: 20px;
+}
+
+.movieDescription {
+  height: 400px;
+  margin-top: -50px;
 }
 
 .posterImage__runtime {
@@ -55,18 +64,20 @@
 .posterImage_description {
   font-style: italic;
   font-size: 1rem;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0;
   display: flex;
   text-align: left;
   width: 50%;
   color: white;
   margin-left: 20px;
+  margin-top: 0;
 }
 
 .buttons {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  margin-top: 50px;
   gap: 2rem;
-  margin-top: 2rem;
+  margin-top: 30px;
   margin-left: 20px;
 }
 
