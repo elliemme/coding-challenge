@@ -52,7 +52,9 @@ const CardsMovies = ({ movie, isWatched = false }) => {
         <div className="cards">
           <img
             className="cards__img"
-            src={`${IMAGE_URL}original${movie ? movie.poster_path : ""}`}
+            src={`${IMAGE_URL}original${
+              movie ? movie.poster_path : unavailable
+            }`}
           />
           <div className="cards__overlay">
             <div className="card__title">

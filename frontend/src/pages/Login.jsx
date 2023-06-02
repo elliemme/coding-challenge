@@ -15,7 +15,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(firebaseAuth, email, password);
-      swal("Logged in successfully", "", "success");
+      swal("Log in successful", "", "success");
     } catch (error) {
       console.log(error.code);
       swal("All fields are required", "Or sign up first", "error");

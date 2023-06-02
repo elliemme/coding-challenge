@@ -40,10 +40,10 @@ router.get("/genre-list", async (req, res) => {
 });
 
 router.get("/search", async (req, res) => {
-  const { query, page } = req.query;
+  const { query } = req.query;
 
   fetchMovies(
-    `${config.SEARCH}api_key=${config.API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=false`,
+    `${config.SEARCH}api_key=${config.API_KEY}&language=en-US&page=1&include_adult=false&query=${query}`,
     res
   );
 });

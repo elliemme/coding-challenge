@@ -36,18 +36,24 @@ export default function UserList() {
       <Navbar isScrolled={isScrolled} />
       <div className="content flex column">
         <h1>My List</h1>
-        <div className="grid flex">
-          {movies.map((movie, index) => {
-            return (
-              <CardsMovies
-                movie={movie}
-                index={index}
-                key={movie.id}
-                isWatched={true}
-              />
-            );
-          })}
-        </div>
+        {movies.length > 0 ? (
+          <div className="grid flex">
+            {movies.map((movie, index) => {
+              return (
+                <CardsMovies
+                  movie={movie}
+                  index={index}
+                  key={movie.id}
+                  isWatched={true}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <h4 style={{ marginLeft: "3rem" }}>
+            No movies in your list. Add some from the search engine.
+          </h4>
+        )}
       </div>
     </Container>
   );
